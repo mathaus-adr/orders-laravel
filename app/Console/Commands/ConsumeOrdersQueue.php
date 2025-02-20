@@ -30,9 +30,8 @@ class ConsumeOrdersQueue extends Command
      */
     public function handle()
     {
-        $amqpConnection = new AMQPStreamConnection('rabbitmq', 5672, 'admin', 'admin');
+        $amqpConnection = app(AMQPStreamConnection::class);
         $channel = $amqpConnection->channel();
-
 
         $channel->queue_declare('laravel', false, true, false, false);
         $channel->exchange_declare('laravel', 'topic', false, true, false);

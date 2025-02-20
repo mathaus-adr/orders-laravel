@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Repositories;
 
 use App\Models\Client as ClientLaravelModel;
+use Illuminate\Support\Facades\DB;
 use Orders\Domain\Entities\Client;
 use Orders\Domain\Interfaces\Repositories\ClientRepositoryInterface;
 
@@ -27,5 +28,14 @@ class ClientRepository implements ClientRepositoryInterface
         ]);
 
         return new Client($client->toArray());
+    }
+
+    public function updateClientTotalOrders(Client $client): void
+    {
+        $clientQuery = ClientLaravelModel::query()->where('external_client_id', $client->id);
+
+        $clientQuery->update([
+            'order_quantity' => DB::raw('order_quantity + 1')
+        ]);
     }
 }
