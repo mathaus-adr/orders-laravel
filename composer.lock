@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7c03b8400cb231c03c821b734f9f671",
+    "content-hash": "baada354ef97faa1c94f1a56db78c316",
     "packages": [
         {
             "name": "brick/math",
@@ -1056,16 +1056,16 @@
         },
         {
             "name": "jetz1n/orders-microservice",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mathaus-adr/orders-domain.git",
-                "reference": "836067388de8199961d58fed6b1305c1f0e014b7"
+                "reference": "072dec1b5ec19a554b792d9dbdeabbd2e9de2765"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mathaus-adr/orders-domain/zipball/836067388de8199961d58fed6b1305c1f0e014b7",
-                "reference": "836067388de8199961d58fed6b1305c1f0e014b7",
+                "url": "https://api.github.com/repos/mathaus-adr/orders-domain/zipball/072dec1b5ec19a554b792d9dbdeabbd2e9de2765",
+                "reference": "072dec1b5ec19a554b792d9dbdeabbd2e9de2765",
                 "shasum": ""
             },
             "require": {
@@ -1081,9 +1081,9 @@
             "description": "Business rule for application",
             "support": {
                 "issues": "https://github.com/mathaus-adr/orders-domain/issues",
-                "source": "https://github.com/mathaus-adr/orders-domain/tree/1.1.0"
+                "source": "https://github.com/mathaus-adr/orders-domain/tree/1.1.1"
             },
-            "time": "2025-02-06T23:36:46+00:00"
+            "time": "2025-02-22T15:54:44+00:00"
         },
         {
             "name": "laravel/framework",

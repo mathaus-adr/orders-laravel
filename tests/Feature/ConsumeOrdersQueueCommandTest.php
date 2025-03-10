@@ -2,12 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Infrastructure\ConsumerInterface;
+use App\Infrastructure\Consumers\OrdersConsumer;
 use App\Models\Client;
 use App\Models\Order;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Mockery;
-use Orders\Domain\Services\CreateOrderService;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -22,14 +23,19 @@ class ConsumeOrdersQueueCommandTest extends TestCase
      */
     public function test_consume_orders_queue_command(): void
     {
-        $amqpConnectionMock = Mockery::mock(AMQPStreamConnection::class);
-        $this->app->instance(AMQPStreamConnection::class, $amqpConnectionMock);
+        $ordersConsumerMock = Mockery::mock(OrdersConsumer::class);
+        $this->app->instance(ConsumerInterface::class, $ordersConsumerMock);
 
-        // Mock the AMQPChannel
+        $amqpConnectionMock = Mockery::mock(AMQPStreamConnection::class);
+
+        $ordersConsumerMock->shouldReceive('createConsumer')
+            ->once()
+            ->with('rabbitmq', '5672', 'admin', 'admin')
+            ->andReturn($amqpConnectionMock);
+
         $amqpChannelMock = Mockery::mock(AMQPChannel::class);
         $amqpConnectionMock->shouldReceive('channel')->andReturn($amqpChannelMock);
 
-        // Mock the message
         $body = [
             'codigoPedido' => $this->faker->numberBetween(3000, 9000),
             'codigoCliente' => $this->faker->numberBetween(3000, 9000),

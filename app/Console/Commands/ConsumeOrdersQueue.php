@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Infrastructure\ConsumerInterface;
 use Illuminate\Console\Command;
 use Orders\Domain\DataTransferObjects\OrderDataDTO;
 use Orders\Domain\Services\CreateOrderService;
@@ -30,7 +31,8 @@ class ConsumeOrdersQueue extends Command
      */
     public function handle()
     {
-        $amqpConnection = app(AMQPStreamConnection::class);
+        $consumerInterface = app(ConsumerInterface::class);
+        $amqpConnection = $consumerInterface->createConsumer('rabbitmq', '5672', 'admin', 'admin');
         $channel = $amqpConnection->channel();
 
         $channel->queue_declare('laravel', false, true, false, false);

@@ -20,6 +20,7 @@ class OrderCollection extends ResourceCollection
         return [
             'data' => $this->collection,
             'quantidade' => $this->collection->count(),
+            'total' => $this->collection->sum('total'),
         ];
     }
 }

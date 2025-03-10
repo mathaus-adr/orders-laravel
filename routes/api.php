@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -7,4 +9,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/clients/{client_id}/orders', \App\Http\Controllers\OrderController::class);
+Route::get('/clients/{client_id}/orders', OrderController::class);
+
+Route::get('/orders', OrderListController::class);
